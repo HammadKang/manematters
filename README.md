@@ -1,65 +1,139 @@
 # ManeMatters
 
-Next.js (App Router) + Tailwind CSS + MDX blog. Curly, Straight & Hair Fall Care.
+**Curly, Straight & Hair Fall Care.** A fast, SEO-friendly hair care blog built with Next.js, Tailwind CSS and MDX.
 
-## Run locally
+Articles are plain `.mdx` files, so publishing a new post means adding one file and pushing to Git. No database and no CMS.
+
+## Features
+
+- **Blog powered by MDX.** Write in Markdown (H2/H3, lists, images) with a small `<Callout>` component for tip boxes.
+- **8 fixed pages:** Home, 3 category pages, article page, About, Contact, Privacy Policy.
+- **Article page:** breadcrumb, author and date, reading time, auto-generated "In this article" list, share buttons, reading progress bar, sidebar (search, categories, recent posts) and related articles.
+- **Live search** over all article titles, with no API needed.
+- **Ad-ready layout** with 4 AdSense positions (home top, below article title, middle of article, sidebar 300x250).
+- **SEO built in:** per-page title, description, Open Graph and Twitter tags, canonical URLs, article JSON-LD, `sitemap.xml` and `robots.txt`.
+- **Fast:** static generation, `next/image` optimization (AVIF/WebP), Google Fonts via `next/font`.
+- **Polished UI:** scroll animations, hover effects, mobile menu, success popups, back-to-top button. Respects "reduce motion".
+- **Fully responsive:** mobile, tablet and desktop.
+
+## Tech stack
+
+| | |
+|---|---|
+| Framework | Next.js (App Router) + React + TypeScript |
+| Styling | Tailwind CSS v4 + Typography plugin |
+| Content | MDX files via `next-mdx-remote`, `gray-matter`, `rehype-slug` |
+| Font | Poppins |
+| Hosting | Vercel |
+
+## Getting started
+
+Requires Node.js 20 or newer.
 
 ```bash
 npm install
-npm run dev      # http://localhost:3000
-npm run build    # production check
+npm run dev        # http://localhost:3000
 ```
 
-## Add a new article (2 minutes)
+Check a production build before deploying:
 
-1. Copy `content/_TEMPLATE.mdx.txt` to `content/posts/your-article-slug.mdx`
-   (the **file name becomes the URL**: `/blog/your-article-slug`).
-2. Fill the top block (front matter): `title`, `description`, `date`, `author`, `category`, `image`.
-   - `category` must be exactly `curly-hair`, `straight-hair` or `hair-fall`.
-3. Featured image, either way:
-   - Free Unsplash photo: open the photo on unsplash.com, copy the id from the image URL (`photo-1234-abcd`) and write `image: "unsplash:photo-1234-abcd"`.
-   - Your own file: put it in `public/images/` and write `image: "/images/my-photo.jpg"` (JPG/WebP about 1200x675).
-   Next.js resizes and optimizes both automatically.
-4. Write the article below the `---` using Markdown:
-   - `## Heading` = H2, `### Heading` = H3
-   - `- item` = bullets, `1. item` = numbered list
-   - `![alt text](/images/photo.jpg)` = image
-   - `<Callout>text</Callout>` = pink tip box
-5. Save, check it at http://localhost:3000, then publish (see below).
+```bash
+npm run build
+npm start
+```
 
-Everything else updates automatically: home page "Latest Articles" (newest 6 by `date`),
-category page, sidebar "Recent 5", related articles, search, sitemap, SEO title/description/Open Graph.
+## Project structure
 
-Hide an article without deleting it: add `draft: true` to its front matter.
+```
+app/                 Pages and routes
+  page.tsx             Home
+  category/[slug]/     Category pages
+  blog/[slug]/         Article page
+  about, contact, privacy-policy/
+  api/contact/         Contact form endpoint
+components/          Header, Footer, ArticleCard, AdSlot, SearchBar, ...
+content/posts/       Your articles (.mdx)
+content/_TEMPLATE.mdx.txt   Copy this to start a new article
+lib/                 Content loader, categories, site settings, images
+public/              Static files (your own images go in public/images)
+```
 
-The in-content ad box is placed automatically in the middle of each article (before the middle H2).
+## Adding an article
 
-## Publish on Vercel
+1. Copy `content/_TEMPLATE.mdx.txt` to `content/posts/your-article-slug.mdx`.
+   The file name becomes the URL: `/blog/your-article-slug`.
+2. Fill in the front matter at the top:
 
-1. Push this folder to a GitHub repo.
-2. vercel.com -> Add New -> Project -> import the repo -> Deploy (defaults are fine).
-3. Project Settings -> Environment Variables: `NEXT_PUBLIC_SITE_URL` = `https://your-domain.com`
-   (used for sitemap, canonical and Open Graph URLs). Redeploy once.
-4. Add your domain under Settings -> Domains.
+   ```mdx
+   ---
+   title: "Rice Water for Curly Hair"
+   description: "One or two lines. Shown on cards and in Google results."
+   date: "2026-10-12"
+   author: "ManeMatters Team"
+   category: "curly-hair"     # curly-hair | straight-hair | hair-fall
+   image: "unsplash:photo-1536304993881-ff6e9eefa2a6"
+   # draft: true              # hides the article without deleting it
+   ---
+   ```
 
-Publishing a new article later = add the `.mdx` file, `git push`. Vercel rebuilds automatically.
+3. Write the article below the front matter:
 
-## AdSense
+   | You write | You get |
+   |---|---|
+   | `## Heading` | H2 |
+   | `### Heading` | H3 |
+   | `- item` / `1. item` | bullet / numbered list |
+   | `![alt text](/images/photo.jpg)` | optimized image |
+   | `<Callout>Tip text</Callout>` | highlighted tip box |
 
-4 ad positions: home (below header), article (below title, middle of content, sidebar 300x250).
-Right now they show placeholder ads (they link to /contact). To go live after AdSense approves you:
+4. Featured image, either way:
+   - **Unsplash:** copy the id from the photo URL (`photo-1234-abcd`) and write `image: "unsplash:photo-1234-abcd"`.
+   - **Your own file:** put it in `public/images/` and write `image: "/images/my-photo.jpg"` (about 1200x675).
 
-1. Vercel -> Settings -> Environment Variables, add:
-   `NEXT_PUBLIC_ADSENSE_CLIENT` (ca-pub-XXXXXXXXXXXXXXXX) and the 4 slot ids
-   `NEXT_PUBLIC_ADSENSE_SLOT_HOME_TOP`, `..._BELOW_TITLE`, `..._IN_CONTENT`, `..._SIDEBAR`
-   (create 4 display ad units in AdSense and copy each unit's slot id).
-2. Redeploy. The sample ads are replaced by real Google ads automatically. No code change needed.
-3. Add the AdSense-required `ads.txt` file to `public/ads.txt` (AdSense shows you the line).
+5. Save and check it locally, then publish (see below).
 
-## Still dummy / to replace
+Everything else updates by itself: home page "Latest Articles" (newest first), the category page, sidebar "Recent Articles", related articles, search, sitemap and SEO tags. The in-content ad is placed automatically before the middle H2 of each article.
 
-- Newsletter form (`components/Newsletter.tsx`) shows the popup but is not connected to an email service.
-- Contact form shows the "Message sent" popup and posts to `app/api/contact/route.ts`, which only logs the message for now. To receive real emails at contact@manematters.com connect Resend/Formspree there.
-- Social icon links in `components/Footer.tsx` (`href="#"`).
-- Sample articles and Unsplash photos - replace with your own.
-- About and Privacy text are starter templates.
+## Deploying to Vercel
+
+1. Push the repo to GitHub.
+2. On [vercel.com](https://vercel.com), choose **Add New → Project**, import the repo and click **Deploy**. The defaults are fine.
+3. In **Settings → Environment Variables** add `NEXT_PUBLIC_SITE_URL` with your live domain (for example `https://manematters.com`, no trailing slash). It is used for the sitemap, canonical links and Open Graph URLs. Redeploy once.
+4. Add your domain under **Settings → Domains**.
+
+After that, publishing a new article is just `git push`. Vercel rebuilds automatically.
+
+## Configuration
+
+| Variable | Purpose |
+|---|---|
+| `NEXT_PUBLIC_SITE_URL` | Live domain, used for SEO URLs |
+| `NEXT_PUBLIC_ADSENSE_CLIENT` | AdSense publisher id (`ca-pub-...`) |
+| `NEXT_PUBLIC_ADSENSE_SLOT_HOME_TOP` | Ad unit id, home page |
+| `NEXT_PUBLIC_ADSENSE_SLOT_BELOW_TITLE` | Ad unit id, below article title |
+| `NEXT_PUBLIC_ADSENSE_SLOT_IN_CONTENT` | Ad unit id, middle of article |
+| `NEXT_PUBLIC_ADSENSE_SLOT_SIDEBAR` | Ad unit id, sidebar |
+
+Copy `.env.example` to `.env.local` for local use. Site name, tagline and contact email live in `lib/site.ts`.
+
+## Enabling AdSense
+
+Until AdSense is set up, the ad positions show a placeholder "Your brand here" banner that links to the contact page. Once your site is approved:
+
+1. Create 4 display ad units in AdSense and copy each unit's slot id.
+2. Add the variables above in Vercel and redeploy. The banners are replaced by real ads automatically.
+3. Put the `ads.txt` line AdSense gives you into `public/ads.txt`.
+
+## Known limitations
+
+These parts are not connected to a service yet:
+
+- **Contact form.** It validates input and shows the "Message sent" popup, but `app/api/contact/route.ts` only logs the message. Connect an email service (Resend, Formspree, etc.) there to receive messages at `contact@manematters.com`.
+- **Newsletter form.** It shows the success popup only. Connect Mailchimp, ConvertKit or similar in `components/Newsletter.tsx`.
+- **Social icons** in the footer point to `#`. Add your profile links in `components/Footer.tsx`.
+- **Sample articles and stock photos** (Unsplash) are placeholders. Replace them with your own content.
+- **About and Privacy Policy** are starter text. Review them before launch, especially the privacy policy if you run ads.
+
+## Disclaimer
+
+Articles are general hair care information and not medical advice.
