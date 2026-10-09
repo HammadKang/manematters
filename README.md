@@ -2,6 +2,8 @@
 
 **Curly, Straight & Hair Fall Care.** A fast, SEO-friendly hair care blog built with Next.js, Tailwind CSS and MDX.
 
+**Live site: [manematters.vercel.app](https://manematters.vercel.app/)**
+
 Articles are plain `.mdx` files, so publishing a new post means adding one file and pushing to Git. No database and no CMS.
 
 ## Features
