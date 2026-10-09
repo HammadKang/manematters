@@ -1,0 +1,31 @@
+---
+title: "Your Article Title"
+description: "1-2 line summary. Shows on cards and in Google results (aim for ~150 chars)."
+date: "2026-10-12"
+author: "ManeMatters Team"
+category: "curly-hair"          # curly-hair | straight-hair | hair-fall
+image: "unsplash:photo-1522337360788-8b13dee7a37e"   # or "/images/my-photo.jpg" (file in public/images/)
+# draft: true                   # uncomment to hide the article from the site
+---
+
+Intro paragraph here.
+
+## First main heading (H2)
+
+Normal text. **Bold**, *italic*, [a link](https://example.com).
+
+### Sub heading (H3)
+
+- Bullet one
+- Bullet two
+
+1. Numbered step
+2. Another step
+
+![Describe the image](/images/another-photo.jpg)
+
+<Callout>Highlighted tip box.</Callout>
+
+## Second main heading (H2)
+
+More text...

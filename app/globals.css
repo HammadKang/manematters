@@ -1,0 +1,99 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-brand: #ff5a7a;
+  --color-brand-dark: #e8405f;
+  --color-brand-soft: #fff0f3;
+  --color-ink: #111111;
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #ffffff;
+  color: #111111;
+  font-family: var(--font-sans);
+}
+
+/* Article typography tuned to the brand */
+.prose {
+  --tw-prose-body: #111111;
+  --tw-prose-headings: #111111;
+  --tw-prose-links: #e8405f;
+  --tw-prose-bullets: #ff5a7a;
+  --tw-prose-counters: #ff5a7a;
+  --tw-prose-quotes: #111111;
+  --tw-prose-quote-borders: #ff5a7a;
+}
+.prose h2 { margin-top: 2em; }
+.prose a { text-underline-offset: 3px; }
+
+/* ---------- Animations ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--d, 0ms);
+}
+.reveal[data-dir="left"] { transform: translateX(-36px); }
+.reveal[data-dir="right"] { transform: translateX(36px); }
+.reveal[data-dir="zoom"] { transform: scale(0.94); }
+.reveal.is-visible { opacity: 1; transform: none; }
+@media (scripting: none) { .reveal { opacity: 1; transform: none; } }
+
+@keyframes float { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-14px) } }
+@keyframes float-slow { 0%, 100% { transform: translate(0, 0) scale(1) } 50% { transform: translate(24px, -18px) scale(1.08) } }
+@keyframes gradient-shift { 0% { background-position: 0% 50% } 50% { background-position: 100% 50% } 100% { background-position: 0% 50% } }
+@keyframes marquee { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+@keyframes page-in { from { opacity: 0; transform: translateY(10px) } to { opacity: 1; transform: none } }
+@keyframes pop { 0% { transform: scale(0.7); opacity: 0 } 70% { transform: scale(1.05) } 100% { transform: scale(1); opacity: 1 } }
+@keyframes draw { to { stroke-dashoffset: 0 } }
+@keyframes fade { from { opacity: 0 } to { opacity: 1 } }
+@keyframes slide-down { from { opacity: 0; transform: translateY(-8px) } to { opacity: 1; transform: none } }
+@keyframes spin { to { transform: rotate(360deg) } }
+@keyframes ken-burns { from { transform: scale(1) } to { transform: scale(1.12) } }
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-float-delay { animation: float 7s ease-in-out 1.2s infinite; }
+.animate-blob { animation: float-slow 14s ease-in-out infinite; }
+.animate-marquee { animation: marquee 35s linear infinite; }
+.animate-page { animation: page-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+.animate-pop { animation: pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-fade { animation: fade 0.25s ease both; }
+.animate-slide-down { animation: slide-down 0.25s ease both; }
+.animate-ken { animation: ken-burns 18s ease-in-out infinite alternate; }
+.draw-check { stroke-dasharray: 40; stroke-dashoffset: 40; animation: draw 0.5s ease 0.3s forwards; }
+.gradient-text {
+  background: linear-gradient(90deg, #ff5a7a, #ff9a8b, #ff5a7a);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-shift 5s ease infinite;
+}
+.marquee:hover .animate-marquee { animation-play-state: paused; }
+.btn-shine { position: relative; overflow: hidden; }
+.btn-shine::after {
+  content: ""; position: absolute; top: 0; left: -75%; width: 50%; height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,.55), transparent);
+  transform: skewX(-20deg); transition: left 0.7s;
+}
+.btn-shine:hover::after { left: 130%; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ---------- Ad card ---------- */
+@keyframes twinkle { 0%, 100% { opacity: .2; transform: scale(.6) rotate(0) } 50% { opacity: 1; transform: scale(1.2) rotate(45deg) } }
+@keyframes nudge { 0%, 100% { transform: translateX(0) } 50% { transform: translateX(6px) } }
+@keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 rgba(255, 90, 122, .6) } 100% { box-shadow: 0 0 0 16px rgba(255, 90, 122, 0) } }
+.ad-border { background: linear-gradient(120deg, #ff5a7a, #ffb199, #ffffff, #ff5a7a); background-size: 300% 300%; animation: gradient-shift 6s ease infinite; }
+.ad-sparkle { animation: twinkle 2.4s ease-in-out infinite; }
+.ad-arrow { animation: nudge 1.4s ease-in-out infinite; }
+.ad-cta { animation: pulse-ring 2s ease-out infinite; }
