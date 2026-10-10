@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import AdSlot from "@/components/AdSlot";
+import AuthorBox from "@/components/AuthorBox";
 import ArticleCard from "@/components/ArticleCard";
 import MdxContent from "@/components/MdxContent";
 import Reveal from "@/components/Reveal";
@@ -107,6 +108,8 @@ export default async function ArticlePage({ params }: Props) {
           <div className="mt-8">
             <MdxContent source={post.content} />
           </div>
+
+          <AuthorBox />
 
           <div className="mt-10 border-t border-gray-100 pt-6">
             <ShareButtons title={post.title} />

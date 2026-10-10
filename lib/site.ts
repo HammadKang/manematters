@@ -3,7 +3,13 @@ export const SITE = {
   tagline: "Curly, Straight & Hair Fall Care",
   description: "Tested remedies for curly, straight & hair fall problems.",
   url: (process.env.NEXT_PUBLIC_SITE_URL || "https://manematters.com").replace(/\/$/, ""),
-  email: "contact@manematters.com",
+  email: "aimanbabar196@gmail.com",
+};
+
+export const AUTHOR = {
+  name: "Aiman Khan Babar",
+  role: "Founder & Writer",
+  bio: "Aiman Khan Babar is the founder and writer of ManeMatters. She has completed a cosmetology/beautician course and writes about curly hair, straight hair and hair fall, based on her training, her own hair care routines and careful research.",
 };
 
 /**

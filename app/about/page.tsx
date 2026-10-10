@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import { IMG, unsplash } from "@/lib/images";
+import { AUTHOR } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -39,7 +40,10 @@ export default function AboutPage() {
               Every article is built around simple routines and remedies that are practical to try at home. We
               explain the &ldquo;why&rdquo; behind each tip so you can adjust it to your own hair.
             </p>
-            {/* TODO: replace with your real story / team details */}
+            <p>
+              ManeMatters is written by {AUTHOR.name}, who has completed a cosmetology/beautician course and
+              started this blog to turn what she has learned into clear, practical hair care guides.
+            </p>
           </div>
         </Reveal>
       </div>
@@ -57,6 +61,19 @@ export default function AboutPage() {
           ))}
         </div>
       </section>
+
+      <div className="mx-auto max-w-3xl px-4 pt-14">
+        <Reveal>
+          <h2 className="text-3xl font-bold">Meet the <span className="text-brand">author</span></h2>
+          <p className="mt-1 font-semibold">{AUTHOR.name}</p>
+          <p className="text-sm text-gray-500">{AUTHOR.role}</p>
+          <p className="mt-3 text-gray-700">{AUTHOR.bio}</p>
+          <p className="mt-3 text-gray-700">
+            Questions or suggestions? Write to us at{" "}
+            <a href="/contact" className="text-brand underline">our contact page</a>.
+          </p>
+        </Reveal>
+      </div>
 
       <div className="mx-auto max-w-3xl px-4 py-14">
         <Reveal>

@@ -130,7 +130,7 @@ Until AdSense is set up, the ad positions show a placeholder "Your brand here" b
 
 These parts are not connected to a service yet:
 
-- **Contact form.** It validates input and shows the "Message sent" popup, but `app/api/contact/route.ts` only logs the message. Connect an email service (Resend, Formspree, etc.) there to receive messages at `contact@manematters.com`.
+- **Contact form.** It validates input and shows the "Message sent" popup, but `app/api/contact/route.ts` only logs the message. Connect an email service (Resend, Formspree, etc.) there to receive messages at `aimanbabar196@gmail.com`.
 - **Newsletter form.** It shows the success popup only. Connect Mailchimp, ConvertKit or similar in `components/Newsletter.tsx`.
 - **Social icons** in the footer point to `#`. Add your profile links in `components/Footer.tsx`.
 - **Sample articles and stock photos** (Unsplash) are placeholders. Replace them with your own content.
