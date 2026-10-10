@@ -15,7 +15,7 @@ export const IMG = {
   straight2: "photo-1747398690600-ffe8ecda9df1",
   hairFall: "photo-1773078280516-df823e1c9d78",
   hairFall2: "photo-1773078280398-18fa2291eef1",
-  rice: "photo-1536304993881-ff6e9eefa2a6",
+  rice: "photo-1784460470008-49f363e19275",
   mask: "photo-1732861612244-5704d12e9397",
   massage: "photo-1767953829433-1e405b6889de",
   stylist: "photo-1634449571010-02389ed0f9b0",
